@@ -19,4 +19,9 @@ Four steps, in order:
  
 A long flashloan operation can cause a `griefing attack`.
 
-npm i @aave/core-v3
+- These modules have to be installed: `npm i @aave/core-v3`
+
+#### Documentation
+
+- https://docs.aave.com/developers/core-contracts/pool
+- https://github.com/aave/aave-v3-core/blob/master/contracts/flashloan/base/FlashLoanSimpleReceiverBase.sol
