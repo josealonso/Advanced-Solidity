@@ -34,6 +34,11 @@ const config: HardhatUserConfig = {
     ],
   },
   networks: {
+    hardhat: {
+      forking: {
+        url: process.env.POLYGONSCAN_API_KEY || "",
+      },
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:
