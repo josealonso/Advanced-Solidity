@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 // pragma solidity ^0.8.10;
 pragma solidity ^0.8.4;
-
+/*
+It imports ERC721Upgradeable and OwnableUpgradeable because the original ERC721 and Ownable contracts 
+have a constructor which cant be used with proxy contracts.
+The UUPSUpgradeable Contract provides with the upgradeTo(address) function 
+which has to be put on the Implementation Contract in case of a UUPS proxy pattern.
+*/
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
