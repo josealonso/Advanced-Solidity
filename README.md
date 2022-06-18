@@ -7,8 +7,8 @@
 
 ### Flashloans
 
-You borrow without any collateral, because you return the money in the same transaction.
-It allows to do arbitrage.
+It's a loan without any collateral, because you return the money in the same transaction.
+Applications: arbitrage, liquidations.
 
 Four steps, in order:
 
