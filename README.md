@@ -64,5 +64,28 @@ Since the `upgradeTo()` function exists on the side of the Implementation contra
 
 ### Flashbots
 
-The only Ethereum testnet supported by Flashbots is `goerli`.
+- The only Ethereum testnet supported by Flashbots is `goerli`.
 
+The `flashbots.ts` script mints an NFT using Flashbots.
+
+#### Explaining the script
+
+ The reason why we created a WebSocket provider this time is because we want to create a socket to listen to every new block that comes in Goerli network. **HTTP Providers**, as we had been using previously, work on a request-response model, where a client sends a request to a server, and the server responds back.
+  In the case of **WebSockets**, however, the client opens a connection with the WebSocket server once, and then the server continuously sends them updates as long as the connection remains open. Therefore the client does not need to send requests again and again.
+  We listen for each block and send a request in each block so that when the **coinbase miner**(miner of the current block) is a flashbots miner, our transaction gets included.
+
+   We specify the chainId which is 5 for Goerli, type which is 2 because we will use the **Post-London Upgrade** gas model which is **EIP-1559**. 
+
+We specify value which is 0.01 because that's the amount for minting 1 NFT and the to address which is the address of FakeNFT contract.
+
+Now for data we need to specify the function selector which is the first four bytes of the Keccak-256 (SHA-3) hash of the name and the arguments of the function. This will determine which function are we trying to call, in our case, it will be the mint function.
+
+Then we specify the maxFeePerGas and maxPriorityFeePerGas to be 3 GWEI and 2 GWEI respectively. Note the values I got here are from looking at the transactions which were mined previously in the network and what Gas Fees were they using.
+
+also, `1 GWEI = 10*WEI = 10*10^8 = 10^9`
+
+We want the transaction to be mined in the next block, so we add 1 to the current blocknumber and send this bundle of transactions.
+
+After sending the bundle, we get a `bundleResponse` on which we check if there was an error or not, if yes we log it.
+
+Note, getting a response doesn't guarantee that our bundle will get included in the next block or not. To check if it will get included in the next block or not you can use `bundleResponse.wait()` but in this simple bot, we will just wait patiently for a few blocks and observe.
