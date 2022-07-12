@@ -60,3 +60,9 @@ Using OpenZeppelin contracts, you can use their `Initialize.sol` contract which 
 
 Since the `upgradeTo()` function exists on the side of the Implementation contract, the developer has to worry about the implementation of this function which may sometimes be complicated and because more code has been added, it increases the possibility of attacks. 
 **This function also needs to be in all the versions of the Implementation Contract** which are upgraded which introduces a risk if maybe the developer forgets to add this function and then the contract can no longer be upgraded.
+
+
+### Flashbots
+
+The only Ethereum testnet supported by Flashbots is `goerli`.
+
